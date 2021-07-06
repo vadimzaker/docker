@@ -1,6 +1,6 @@
 global:
   #slack_api_url: https://hooks.slack.com/services/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
-  slack_api_url: https://hooks.slack.com/services/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
+  #slack_api_url: https://hooks.slack.com/services/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
 #  smtp_smarthost: 'mail.ignited.it:25'
 #  smtp_from: 'alert@domain.tld'
 #  smtp_auth_username: 'user'
@@ -48,8 +48,8 @@ receivers:
         - send_resolved: true
           #icon_url: "https://avatars3.githubusercontent.com/u/3380462"
           text: "{{ range .Alerts }} {{ .StartsAt }}\n{{ .Annotations.summary }}\n{{ .Annotations.description }}\n{{ end }}"
-          title_link: "https://grafana.igenv.com/d/xfpJB9FGz/instance-dashboard?orgId=1"
-#          title_link: "https://prometheus.igenv.com/alerts"
+          title_link: "https://grafana.vadim.pp.ua/d/xfpJB9FGz/instance-dashboard?orgId=1"
+#          title_link: "https://prometheus.vadim.pp.ua/alerts"
 #          title: '{{ template "custom_title" . }}'
 #          text: '{{ template "custom_slack_message" . }}'
     - name: 'warning'
@@ -57,12 +57,12 @@ receivers:
         - send_resolved: true
           #icon_url: https://avatars3.githubusercontent.com/u/3380462
           text: "{{ range .Alerts }} {{ .StartsAt }}\n{{ .Annotations.summary }}\n{{ .Annotations.description }}\n{{ end }}"
-          title_link: "https://prometheus.igenv.com/alerts"
+          title_link: "https://prometheus.vadim.pp.ua/alerts"
           actions:
           - type: button
             text: 'Grafana'
-            url: 'https://grafana.igenv.com/d/xfpJB9FGz/instance-dashboard?orgId=1'
-#          title_link: "https://prometheus.igenv.com/alerts"
+            url: 'https://grafana.vadim.pp.ua/d/xfpJB9FGz/instance-dashboard?orgId=1'
+#          title_link: "https://prometheus.vadim.pp.ua/alerts"
 #          title: '{{ template "custom_title" . }}'
 #          text: '{{ template "custom_slack_message" . }}'
 
@@ -73,11 +73,11 @@ receivers:
           send_resolved: true
           #icon_url: https://avatars3.githubusercontent.com/u/3380462
           text: "{{ range .Alerts }}<!channel> {{ .StartsAt }}\n{{ .Annotations.summary }}\n{{ .Annotations.description }}\n{{ end }}"
-          title_link: "https://prometheus.igenv.com/alerts"
+          title_link: "https://prometheus.vadim.pp.ua/alerts"
           actions:
           - type: button
             text: 'Grafana'
-            url: 'https://grafana.igenv.com/d/xfpJB9FGz/instance-dashboard?orgId=1'
+            url: 'https://grafana.vadim.pp.ua/d/xfpJB9FGz/instance-dashboard?orgId=1'
 
     - name: 'alterme'
       slack_configs:
@@ -85,10 +85,10 @@ receivers:
           send_resolved: true
           #icon_url: https://avatars3.githubusercontent.com/u/3380462
           text: "{{ range .Alerts }}<!channel> {{ .StartsAt }}\n{{ .Annotations.summary }}\n{{ .Annotations.description }}\n{{ end }}"
-          title_link: "https://prometheus.igenv.com/alerts"
+          title_link: "https://prometheus.vadim.pp.ua/alerts"
           actions:
           - type: button
             text: 'Grafana'
-            url: 'https://grafana.igenv.com/d/xfpJB9FGz/instance-dashboard?orgId=1'
+            url: 'https://grafana.vadim.pp.ua/d/xfpJB9FGz/instance-dashboard?orgId=1'
 
 
