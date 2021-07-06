@@ -1,0 +1,12 @@
+{
+	"Email": "support@megahost.com.ua",
+	"Registration": {
+		"body": {
+			"status": "valid",
+			"contact": [
+				"mailto:support@megahost.com.ua"
+			]
+		},
+		"uri": "https://acme-v02.api.letsencrypt.org/acme/acct/90415769"
+	}
+}

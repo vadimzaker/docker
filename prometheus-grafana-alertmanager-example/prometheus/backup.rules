@@ -1,0 +1,12 @@
+groups:
+- name: backup_alerting
+  rules:
+
+  - alert: backup_absent
+    expr: (time() - s3_last_modified_object_date) / 3600 > 30
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "absent backup to {{ $labels.bucket }}/{{ $labels.prefix }}"
+      description: "last backup to {{ $labels.bucket }}/{{ $labels.prefix }} was {{ $value }}h ago"

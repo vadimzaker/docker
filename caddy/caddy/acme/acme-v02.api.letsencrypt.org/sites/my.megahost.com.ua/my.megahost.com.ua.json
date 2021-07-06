@@ -1,0 +1,5 @@
+{
+	"domain": "my.megahost.com.ua",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03138d5c6b19718d88fa7f287ba8e6875649",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03138d5c6b19718d88fa7f287ba8e6875649"
+}

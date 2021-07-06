@@ -1,0 +1,32 @@
+zabbix.vadim.pp.ua {
+       gzip
+        tls magellane@ukr.net
+        proxy / http://192.168.0.4:8880 {
+                transparent
+        }
+}
+
+elk.vadim.pp.ua {
+       gzip
+        tls magellane@ukr.net
+        proxy / http://192.168.0.4:5601 {
+                transparent
+        }
+}
+
+hub.vadim.pp.ua {
+       gzip
+        tls magellane@ukr.net
+        proxy / http://192.168.0.4:8082 {
+                transparent
+        }
+}
+
+nexus.vadim.pp.ua {
+       gzip
+        tls magellane@ukr.net
+        proxy / http://192.168.0.4:8081 {
+                transparent
+        }
+}
+

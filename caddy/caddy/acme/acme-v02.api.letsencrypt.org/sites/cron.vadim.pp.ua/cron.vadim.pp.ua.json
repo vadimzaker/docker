@@ -1,0 +1,5 @@
+{
+	"domain": "cron.vadim.pp.ua",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/04000f69442e498d109af65b556596792c5f",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/04000f69442e498d109af65b556596792c5f"
+}

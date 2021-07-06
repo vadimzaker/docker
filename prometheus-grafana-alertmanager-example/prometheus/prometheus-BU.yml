@@ -1,0 +1,163 @@
+# my global config
+global:
+  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+  evaluation_interval: 15s # By default, scrape targets every 15 seconds.
+  # scrape_timeout is set to the global default (10s).
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+      monitor: 'my-project'
+
+# Load and evaluate rules in this file every 'evaluation_interval' seconds.
+rule_files:
+  - 'alert.rules'
+  - 'blackbox.rules'
+  - 'cadvisor.rules'
+  - 'mysql.rules'
+  # - "first.rules"
+  # - "second.rules"
+
+# alert
+alerting:
+  alertmanagers:
+  - scheme: http
+    static_configs:
+    - targets:
+      - "alertmanager:9093"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+  - job_name: 'node'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+         - targets:
+           - localhost:9090
+           - node-exporter:9100
+  - job_name: 'cadvisor-stage'
+    scrape_interval: 5s
+    scheme: https
+    static_configs:
+         - targets:
+           - stage-cadvisor.igenv.com:443
+  - job_name: 'cadvisor-prod'
+    scrape_interval: 5s
+    scheme: https
+    static_configs:
+         - targets:
+           - prod-cadvisor.igenv.com:443
+  - job_name: 'blackbox'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]  # Look for a HTTP 200 response.
+    static_configs:
+      - targets:
+        - https://crm-stage.igenv.com/login
+        - https://crm.igenv.com/login
+        - http://mailcatcher.igenv.com:1080
+        - https://analytics.igenv.com/login
+        - https://analytics-stage.igenv.com/login
+        - https://l.horizondate.com/healthcheck
+        - https://landings-stage.igenv.com/healthcheck
+        - https://api-cms-stage.igenv.com/login
+        - https://api.horizondate.com/login
+        - https://b2b-cms-stage.igenv.com
+        - https://b2b.horizondate.com
+        - https://cms-stage.igenv.com
+        - https://horizondate.com
+        - https://hotstories.me
+        - https://dev.hotstories.me
+        - https://simweb.igenv.com/sign-in/login
+#        - https://dating-blog.com
+        - https://dating-pro.com
+#        - https://airfitness.club
+        - http://similarfaces.dev.igenv.com
+        - https://datingwebsites2020.com
+        - https://hexpert.net/auth
+        - https://support-stage.igenv.com/auth
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: "blackbox_exporter:9115"  # Blackbox exporter.
+#      - target_label: region
+#        replacement: "local"
+  - job_name: 'ec2'
+    ec2_sd_configs:
+      - region: eu-central-1
+        access_key: AKIAXLVNOULBFRZI6FZD
+        secret_key: uBt09nHudNSV0kEgPJ3ICGLHzOE1HgxUFIV9xf4X
+        port: 9100
+    relabel_configs:
+      - source_labels: [__meta_ec2_instance_id]
+        target_label: instance_id
+      - source_labels: [__meta_ec2_instance_type]
+        target_label: instance_type
+      - source_labels: [__meta_ec2_private_dns_name]
+        target_label: private_dns_name
+      - source_labels: [__meta_ec2_private_ip]
+        target_label: private_ip
+      - source_labels: [__meta_ec2_public_dns_name]
+        target_label: public_dns_name
+      - source_labels: [__meta_ec2_public_ip]
+        target_label: public_ip
+      - source_labels: [__meta_ec2_tag_Name]
+        target_label: tag_Name
+      - source_labels: [__meta_ec2_tag_ansible_name]
+        target_label: ansible_name
+  - job_name: 'node-exporter'
+    scrape_interval: 5s
+    static_configs:
+         - targets:
+           - 161.35.199.101:9100
+           - 164.90.164.14:9100
+           - 164.90.162.6:9100
+           - 178.128.42.238:9100
+           - 167.99.236.181:9100
+           - mx.hotstories.me:9100
+           - dev.hotstories.me:9100
+           - hotstories.me:9100
+           - www.adult-stories.gq:9100
+  - job_name: mysql
+    static_configs:
+      - targets:
+        - mm-1-stage.igenv.priv:9104
+        - mm-1-prod.igenv.priv:9104
+        - ms-1-prod.igenv.priv:9104
+  - job_name: redis
+    static_configs:
+      - targets:
+        - 172.31.10.96:9121
+        - 172.31.44.16:9121
+  - job_name: rabbitmq
+    static_configs:
+      - targets:
+        - rabbitmq-prod-1.igenv.priv:15692
+        - rabbitmq-prod-2.igenv.priv:15692
+        - rabbitmq-prod-3.igenv.priv:15692
+        - rabbitmq-stage.igenv.priv:15692
+  - job_name: memcached
+    static_configs:
+      - targets:
+        - memcached-stage-1.igenv.com:9150
+        - memcached-prod-1.igenv.com:9150
+  - job_name: statsd_metrics
+    static_configs:
+      - targets:
+        - statsd-exporter:9102
+  - job_name: 'aws-billing'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: 
+        - aws-exporter:5000

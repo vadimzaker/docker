@@ -1,0 +1,94 @@
+global:
+  #slack_api_url: https://hooks.slack.com/services/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
+  slack_api_url: https://hooks.slack.com/services/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
+#  smtp_smarthost: 'mail.ignited.it:25'
+#  smtp_from: 'alert@domain.tld'
+#  smtp_auth_username: 'user'
+#  smtp_auth_password: 'pass'
+
+route:
+    group_by: ['alertname', 'cluster', 'job', 'env', 'ansible_name', 'tag_Name']
+    repeat_interval: 1d
+    group_interval: 5m
+
+    receiver: 'default'
+
+    routes:
+    # all 'warning' to the 'warning' receiver with P3
+    - match:
+        severity: warning
+      receiver: warning
+      routes:
+        - match_re:
+            tag_Name: .*(alterme).*
+          receiver: alterme
+
+        - match_re:
+            ansible_name: .*(alterme).*
+          receiver: alterme
+    # all 'critical' to the 'critical' receiver with P1
+    - match:
+        severity: critical
+      receiver: critical
+      routes:
+        - match_re:
+            tag_Name: .*(alterme).*
+          receiver: alterme
+
+        - match_re:
+            ansible_name: .*(alterme).*
+          receiver: alterme
+    - match:
+        severity: alterme
+      receiver: alterme
+
+receivers:
+    - name: 'default'
+      slack_configs:
+        - send_resolved: true
+          #icon_url: "https://avatars3.githubusercontent.com/u/3380462"
+          text: "{{ range .Alerts }} {{ .StartsAt }}\n{{ .Annotations.summary }}\n{{ .Annotations.description }}\n{{ end }}"
+          title_link: "https://grafana.igenv.com/d/xfpJB9FGz/instance-dashboard?orgId=1"
+#          title_link: "https://prometheus.igenv.com/alerts"
+#          title: '{{ template "custom_title" . }}'
+#          text: '{{ template "custom_slack_message" . }}'
+    - name: 'warning'
+      slack_configs:
+        - send_resolved: true
+          #icon_url: https://avatars3.githubusercontent.com/u/3380462
+          text: "{{ range .Alerts }} {{ .StartsAt }}\n{{ .Annotations.summary }}\n{{ .Annotations.description }}\n{{ end }}"
+          title_link: "https://prometheus.igenv.com/alerts"
+          actions:
+          - type: button
+            text: 'Grafana'
+            url: 'https://grafana.igenv.com/d/xfpJB9FGz/instance-dashboard?orgId=1'
+#          title_link: "https://prometheus.igenv.com/alerts"
+#          title: '{{ template "custom_title" . }}'
+#          text: '{{ template "custom_slack_message" . }}'
+
+    - name: 'critical'
+      slack_configs:
+        - api_url: https://hooks.slack.com/services/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
+          channel: "monitoring_critical"
+          send_resolved: true
+          #icon_url: https://avatars3.githubusercontent.com/u/3380462
+          text: "{{ range .Alerts }}<!channel> {{ .StartsAt }}\n{{ .Annotations.summary }}\n{{ .Annotations.description }}\n{{ end }}"
+          title_link: "https://prometheus.igenv.com/alerts"
+          actions:
+          - type: button
+            text: 'Grafana'
+            url: 'https://grafana.igenv.com/d/xfpJB9FGz/instance-dashboard?orgId=1'
+
+    - name: 'alterme'
+      slack_configs:
+        - api_url: https://hooks.slack.com/services/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
+          send_resolved: true
+          #icon_url: https://avatars3.githubusercontent.com/u/3380462
+          text: "{{ range .Alerts }}<!channel> {{ .StartsAt }}\n{{ .Annotations.summary }}\n{{ .Annotations.description }}\n{{ end }}"
+          title_link: "https://prometheus.igenv.com/alerts"
+          actions:
+          - type: button
+            text: 'Grafana'
+            url: 'https://grafana.igenv.com/d/xfpJB9FGz/instance-dashboard?orgId=1'
+
+

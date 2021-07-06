@@ -1,0 +1,12 @@
+groups:
+- name: cron_alerting
+  rules:
+
+  - alert: cron_fail
+    expr: node_cron_job_exit_code != 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "cron fail on {{ $labels.ansible_name }}"
+      description: "fail {{ $labels.code }} on {{ $labels.ansible_name }}"

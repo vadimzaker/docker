@@ -1,0 +1,49 @@
+global:
+  slack_api_url: https://hooks.slack.com/services/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
+#  smtp_smarthost: 'mail.ignited.it:25'
+#  smtp_from: 'alert@domain.tld'
+#  smtp_auth_username: 'user'
+#  smtp_auth_password: 'pass'
+
+route:
+    group_by: ['alertname', 'cluster', 'job', 'env']
+    repeat_interval: 1d
+    group_interval: 10s
+    receiver: 'default'
+
+    routes:
+    # all 'warning' to the 'warning' receiver with P3
+    - match:
+        severity: warning
+      receiver: warning
+    # all 'critical' to the 'critical' receiver with P1
+    - match:
+        severity: critical
+      receiver: critical
+
+receivers:
+    - name: 'default'
+      slack_configs:
+        - send_resolved: true
+          icon_url: https://avatars3.githubusercontent.com/u/3380462
+          text: "{{ range .Alerts }}<!channel> {{ .Annotations.summary }}\n{{ .Annotations.description }}\n{{ end }}"
+#          title: '{{ template "custom_title" . }}'
+#          text: '{{ template "custom_slack_message" . }}'
+    - name: 'warning'
+      slack_configs:
+        - send_resolved: true
+          icon_url: https://avatars3.githubusercontent.com/u/3380462
+          text: "{{ range .Alerts }}<!channel> {{ .Annotations.summary }}\n{{ .Annotations.description }}\n{{ end }}"
+#          title: '{{ template "custom_title" . }}'
+#          text: '{{ template "custom_slack_message" . }}'
+
+    - name: 'critical'
+      slack_configs:
+        - send_resolved: true
+          icon_url: https://avatars3.githubusercontent.com/u/3380462
+          text: "{{ range .Alerts }}<!channel> {{ .Annotations.summary }}\n{{ .Annotations.description }}\n{{ end }}"
+#          title: '{{ template "custom_title" . }}'
+#          text: '{{ template "custom_slack_message" . }}'
+#templates:
+#- /etc/alertmanager/default.tmpl
+#- /etc/alertmanager/notifications.tmpl

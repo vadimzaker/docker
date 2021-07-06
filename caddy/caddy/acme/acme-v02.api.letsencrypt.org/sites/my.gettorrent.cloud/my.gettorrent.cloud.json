@@ -1,0 +1,5 @@
+{
+	"domain": "my.gettorrent.cloud",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0321553ccefc175d4fbcfcc0301810a8c40a",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0321553ccefc175d4fbcfcc0301810a8c40a"
+}

@@ -1,0 +1,20 @@
+groups:
+- name: supervisor
+  rules:
+  - alert: ServiceSupervisorTaskDown
+    expr: sum(avg_over_time(node_supervisord_up[2m])) BY (tag_Name,name) == 0
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Supervisor task is down!"
+      description: "Host: {{$labels.tag_Name}}\n Task name: {{$labels.name}}"
+
+  - alert: ServiceSupervisorTaskStateError
+    expr: sum(node_supervisord_state) BY (tag_Name,name) != 20 != 10
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Supervisor task state errored!"
+      description: "Host: {{$labels.tag_Name}}\n Task name: {{$labels.name}} returned code was {{ $value }}"

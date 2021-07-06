@@ -1,0 +1,5 @@
+{
+	"domain": "aquazabbix.vadim.pp.ua",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0414b51694c4030e2dec0df770f9fc71c01f",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0414b51694c4030e2dec0df770f9fc71c01f"
+}

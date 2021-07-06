@@ -1,0 +1,5 @@
+{
+	"domain": "zabbix.vadim.pp.ua",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03bd0b4d01880664bbde5a919776567b3f12",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03bd0b4d01880664bbde5a919776567b3f12"
+}

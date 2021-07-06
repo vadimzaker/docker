@@ -1,0 +1,21 @@
+version: '2.1'
+
+services:
+
+  caddy:
+    image: truedevops/caddy_caddy
+    container_name: caddy
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+#    links:
+#      - "nexus"
+    environment:
+      - CADDYPATH=/etc/caddycerts
+      - ACME_AGREE=true
+    volumes:
+      - ${PWD}/Caddyfile:/etc/Caddyfile
+      - ${PWD}/caddy:/etc/caddycerts
+      - ${PWD}/wordpress:/var/www/html
+

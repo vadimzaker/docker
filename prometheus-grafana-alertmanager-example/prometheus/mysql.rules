@@ -1,0 +1,74 @@
+groups:
+- name: mysql
+  rules:
+  - alert: mysql_is_running
+    expr: mysql_up == 0
+    for: 30s
+    labels:
+      severity: critical
+    annotations:
+      summary: "Critical: MySQL is down on the host {{ $labels.instance }}."
+      description: "MySQL has been down for more than 30 seconds"
+
+  - alert: MysqlTooManyConnections
+    expr: avg by (instance) (max_over_time(mysql_global_status_threads_connected[5m])) / avg by (instance) (mysql_global_variables_max_connections) * 100 > 80
+    for: 30s
+    labels:
+      severity: critical
+    annotations:
+      summary: "Critical: MySQL connections utilization (>80%) on the host {{ $labels.instance }}"
+      description: "MySQL connections utilization is {{ humanize $value}}%"
+
+  - alert: MysqlHighThreadsRunning
+    expr: avg by (instance) (max_over_time(mysql_global_status_threads_running[5m])) / avg by (instance) (mysql_global_variables_max_connections) * 100 > 60
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Warning: MySQL connections utilization (>60%) on the host {{ $labels.instance }}"
+      description: "MySQL connections utilization is {{ humanize $value}}%"
+
+  - alert: mysql_active_threads
+    expr: mysql_global_status_threads_running > 40
+    for: 60s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Warning: MySQL active threads (>40) on the host {{ $labels.instance }}"
+      description: "MySQL active threads is {{ humanize $value}}"
+
+  - alert: mysql_active_threads
+    expr: mysql_global_status_threads_running > 100
+    for: 60s
+    labels:
+      severity: critical
+    annotations:
+      summary: "Critical: MySQL active threads (>100) on the host {{ $labels.instance }}"
+      description: "MySQL active threads is {{ humanize $value}}"
+
+  - alert: mysql_replication_is_running
+    expr: (mysql_slave_status_slave_io_running !=1) or (mysql_slave_status_slave_sql_running != 1)
+    for: 60s
+    labels:
+      severity: critical
+    annotations:
+      summary: "Critical: MySQL replication is broken on the host {{ $labels.instance }}"
+      description: "MySQL replication is broken"
+
+  - alert: mysql_replication_lagging
+    expr: mysql_slave_status_seconds_behind_master > 300
+    for: 60s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Warning: MySQL replication lagging(>300s) on the host {{ $labels.instance }}"
+      description: "MySQL replication lagging is {{ humanize $value}}s"
+
+  - alert: mysql_replication_lagging
+    expr: mysql_slave_status_seconds_behind_master > 600
+    for: 60s
+    labels:
+      severity: critical
+    annotations:
+      summary: "Critical: MySQL replication lagging(>600s) on the host {{ $labels.instance }}"
+      description: "MySQL replication lagging is {{ humanize $value}}s"

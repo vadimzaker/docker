@@ -1,0 +1,60 @@
+groups:
+- name: container_alerting
+  rules:
+
+  - alert: ContainerCpuUsage
+    expr: (sum(rate(container_cpu_user_seconds_total{image!=""}[3m])) BY (name) * 100) > 80
+    #expr: (sum by(name) (rate(container_cpu_user_seconds_total{image!=""}[3m])) * 100) > 40
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: Container CPU usage (instance {{ $labels.name }})
+      description: Container CPU usage is {{ $value | humanize}}
+
+  - alert: ContainerCpuUsage
+    expr: (sum(rate(container_cpu_user_seconds_total{image!=""}[3m])) BY (name) * 100) > 200
+    #expr: (sum by(name) (rate(container_cpu_user_seconds_total{image!=""}[3m])) * 100) > 40
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: Container CPU usage (instance {{ $labels.name }})
+      description: Container CPU usage is {{ $value | humanize}}
+
+  - alert: ContainerMemoryUsage
+    expr: (sum(container_memory_working_set_bytes{image!=""}) BY (name) / sum(container_spec_memory_limit_bytes{image!=""} > 0) BY (name) * 100) > 80
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: Container Memory usage (instance {{ $labels.name }})
+      description: Container Memory usage is {{ $value | humanize}}
+
+  - alert: ContainerMemoryUsage
+    expr: (sum(container_memory_working_set_bytes{image!=""}) BY (name) / sum(container_spec_memory_limit_bytes{image!=""} > 0) BY (name) * 100) > 99
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: Container Memory usage (instance {{ $labels.name }})
+      description: Container Memory usage is {{ $value | humanize}}
+
+  - alert: ContainerVolumeIoUsage
+    expr: (sum(container_fs_io_current{image!=""}) BY (instance, name) * 100) > 80
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: Container Volume IO usage (instance {{ $labels.name }})
+      description: Container Volume IO usage is {{ $value | humanize}}
+
+  - alert: ContainerHighThrottleRate
+    expr: rate(container_cpu_cfs_throttled_seconds_total[3m]) > 1
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: Container high throttle rate (instance {{ $labels.instance }})
+      description: Container is being throttled\n  VALUE = {{ $value | humanize}}
+

@@ -1,0 +1,97 @@
+groups:
+- name: system_alerting
+  rules:
+
+  - alert: HostOutOfMemory
+    expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 10
+    for: 3m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Host out of memory ({{ $labels.ansible_name }})"
+      description: "Node memory is filling up (< 10% left)\n VALUE = {{ $value }}"
+
+  - alert: HostUnusualNetworkThroughputIn
+    expr: sum by (ansible_name) (irate(node_network_receive_bytes_total[2m])) / 1024 / 1024 > 200
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Host unusual network throughput in ({{ $labels.ansible_name }})"
+      description: "Host network interfaces are probably receiving too much data (> 200 MB/s)\n VALUE = {{ $value }}"
+
+  - alert: HostUnusualDiskWriteRate
+    expr: sum by (ansible_name) (irate(node_disk_written_bytes_total[2m])) / 1024 / 1024 > 100
+    for: 3m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Host unusual disk write rate ({{ $labels.ansible_name }})"
+      description: "Disk is probably writing too much data (> 100 MB/s)\n VALUE = {{ $value }}"
+  
+#  - alert: HostDiskWillFillIn4Hours
+#    expr: predict_linear(node_filesystem_free_bytes{fstype!~"tmpfs"}[1h], 4 * 3600) < 0
+#    for: 1m
+#    labels:
+#      severity: warning
+#    annotations:
+#      summary: "Host disk will fill in 4 hours ({{ $labels.ansible_name }})"
+#      description: "Disk will fill in 4 hours at current write rate\n VALUE = {{ $value }}"
+
+  - alert: HostOutOfInodes
+    expr: node_filesystem_files_free{mountpoint ="/"} / node_filesystem_files{mountpoint ="/"} * 100 < 10
+    for: 3m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Host out of inodes ({{ $labels.ansible_name }})"
+      description: "Disk is almost running out of available inodes (< 10% left)\n VALUE = {{ $value }}"
+
+  - alert: high_load
+    expr: sum by (ansible_name) (node_load1{ansible_name!=""}) > 5.0
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Instance {{ $labels.ansible_name }} under high load"
+      description: "{{ $labels.ansible_name }} - current value is {{ $value | humanize }}"
+
+  - alert: high_load
+    expr: sum by (ansible_name) (node_load1{ansible_name!=""}) > 10.0
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Instance {{ $labels.ansible_name }} under high load"
+      description: "{{ $labels.ansible_name }} - current value is {{ $value | humanize }}"
+
+
+#  - alert: site_down
+#    expr: probe_success < 1
+#    for: 30s
+#    labels:
+#      severity: page
+#    annotations:
+#      summary: "Site Down: {{$labels.instance}}"
+#      description: "Site Down: {{$labels.instance}} for more than 30 seconds"
+
+
+- name: low_root_disk_space
+  rules: 
+  - alert: NodeLowRootDiskWarningTest
+    expr: ((node_filesystem_size_bytes{mountpoint="/"} - node_filesystem_free_bytes{mountpoint="/"} ) / node_filesystem_size_bytes{mountpoint="/"} * 100) > 85
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: 'Low root disk space'
+      description: '{{ $labels.ansible_name }}: Data disk usage is above 85%. Current value is {{ $value | humanize }}%.'
+
+  - alert: NodeLowRootDiskCriticalTest
+    expr: ((node_filesystem_size_bytes{mountpoint="/"} - node_filesystem_free_bytes{mountpoint="/"} ) / node_filesystem_size_bytes{mountpoint="/"} * 100) > 95
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: 'Low root disk space'
+      description: '{{$labels.ansible_name}}: Data disk usage is above 95%. Current value is {{ $value | humanize }}%.'

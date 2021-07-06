@@ -1,0 +1,5 @@
+{
+	"domain": "nexus.vadim.pp.ua",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0393f592db3e1bb20d684c4c133beb372417",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0393f592db3e1bb20d684c4c133beb372417"
+}

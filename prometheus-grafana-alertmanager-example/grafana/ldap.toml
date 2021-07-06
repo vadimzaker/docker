@@ -1,0 +1,26 @@
+[[servers]]
+host = "ipa.igenv.com"
+port = 636
+use_ssl = true
+start_tls = false
+ssl_skip_verify = true
+bind_dn = "uid=%s,cn=users,cn=accounts,dc=igenv,dc=com"
+search_filter = "(uid=%s)"
+search_base_dns = ["cn=users,cn=accounts,dc=igenv,dc=com"]
+group_search_base_dns = ["cn=groups,cn=accounts,dc=igenv,dc=com"]
+[servers.attributes]
+name = "givenName"
+surname = "sn"
+username = "uid"
+member_of = "memberOf"
+email = "mail"
+[[servers.group_mappings]]
+group_dn = "cn=grafana_igenv_admins,cn=groups,cn=accounts,dc=igenv,dc=com"
+org_role = "Admin"
+grafana_admin = true
+[[servers.group_mappings]]
+group_dn = "cn=grafana_igenv_users,cn=groups,cn=accounts,dc=igenv,dc=com"
+org_role = "Editor"
+[[servers.group_mappings]]
+group_dn = "cn=grafana_igenv_users,cn=groups,cn=accounts,dc=igenv,dc=com"
+org_role = "Viewer"

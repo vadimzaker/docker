@@ -1,0 +1,5 @@
+{
+	"domain": "vadim.pp.ua",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/04d3c88753f05cf4fc342a350d97aab299e2",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/04d3c88753f05cf4fc342a350d97aab299e2"
+}
