@@ -83,7 +83,7 @@ services:
       - grafana_data:/var/lib/grafana
       - ./grafana/dashboards:/var/lib/grafana/dashboards
       - ./grafana/provisioning:/etc/grafana/provisioning
-      - ./grafana/ldap.toml:/etc/grafana/ldap.toml
+#      - ./grafana/ldap.toml:/etc/grafana/ldap.toml
     env_file:
       - config.monitoring
 
