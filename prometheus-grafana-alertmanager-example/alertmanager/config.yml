@@ -1,6 +1,6 @@
 global:
   #slack_api_url: https://hooks.slack.com/services/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
-  #slack_api_url: https://hooks.slack.com/services/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
+  slack_api_url: https://hooks.slack.com/services/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
 #  smtp_smarthost: 'mail.ignited.it:25'
 #  smtp_from: 'alert@domain.tld'
 #  smtp_auth_username: 'user'
@@ -68,7 +68,7 @@ receivers:
 
     - name: 'critical'
       slack_configs:
-        - api_url: https://hooks.slack.com/services/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
+        - api_url: https://hooks.slack.com/services/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
           channel: "monitoring_critical"
           send_resolved: true
           #icon_url: https://avatars3.githubusercontent.com/u/3380462
@@ -81,7 +81,7 @@ receivers:
 
     - name: 'alterme'
       slack_configs:
-        - api_url: https://hooks.slack.com/services/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
+        - api_url: https://hooks.slack.com/services/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
           send_resolved: true
           #icon_url: https://avatars3.githubusercontent.com/u/3380462
           text: "{{ range .Alerts }}<!channel> {{ .StartsAt }}\n{{ .Annotations.summary }}\n{{ .Annotations.description }}\n{{ end }}"
