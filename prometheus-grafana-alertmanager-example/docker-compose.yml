@@ -84,8 +84,11 @@ services:
       - ./grafana/dashboards:/var/lib/grafana/dashboards
       - ./grafana/provisioning:/etc/grafana/provisioning
 #      - ./grafana/ldap.toml:/etc/grafana/ldap.toml
+      - ./grafana/admin_password:/admin_password
     env_file:
       - config.monitoring
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD__FILE: admin_password
 
   blackbox_exporter:
     image: prom/blackbox-exporter:v0.18.0
