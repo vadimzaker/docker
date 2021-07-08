@@ -67,7 +67,7 @@ scrape_configs:
     static_configs:
       - targets:
         - https://gettorrent.cloud
-        - https://my.gettorrent.cloud
+        # - https://my.gettorrent.cloud
         - http://aquaflora.com.ua
         - https://megahost.com.ua
         - https://megahost.com.ua/billing
