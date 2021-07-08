@@ -48,12 +48,18 @@ scrape_configs:
          - targets:
            - localhost:9090
            - node-exporter:9100
-  - job_name: 'cadvisor-stage'
+  - job_name: 'cadvisor-infra'
     scrape_interval: 5s
     scheme: http
     static_configs:
          - targets:
-           - cadvisor:8080
+           - cadvisor:9595
+  - job_name: 'cadvisor-home'
+    scrape_interval: 5s
+    scheme: http
+    static_configs:
+         - targets:
+           - home.vadim.pp.ua:9595
   - job_name: 'blackbox'
     metrics_path: /probe
     params:
