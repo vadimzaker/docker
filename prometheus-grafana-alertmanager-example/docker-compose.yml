@@ -59,19 +59,6 @@ services:
     deploy:
       mode: global
 
-  cadvisor:
-    image: google/cadvisor
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:rw
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-    ports:
-      - 8080:8080
-    restart: always
-    deploy:
-      mode: global
-
   grafana:
     image: grafana/grafana:7.3.2
 #    image: grafana/grafana:7.2.0
@@ -113,10 +100,13 @@ services:
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     container_name: cadvisor
-    ports:
-    - 9595:8080
+    # ports:
+    # - 9595:8080
     volumes:
     - /:/rootfs:ro
     - /var/run:/var/run:rw
     - /sys:/sys:ro
     - /var/lib/docker/:/var/lib/docker:ro
+    restart: always
+    deploy:
+      mode: global
