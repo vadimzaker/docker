@@ -1,5 +1,5 @@
 global:
-  slack_api_url: https://hooks.slack.com/services/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
+  slack_api_url: https://hooks.slack.com/services/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
 #  smtp_smarthost: 'mail.ignited.it:25'
 #  smtp_from: 'alert@domain.tld'
 #  smtp_auth_username: 'user'

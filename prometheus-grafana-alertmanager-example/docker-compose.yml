@@ -113,14 +113,3 @@ services:
 #      - '--statsd.listen-udp="0.0.0.0:9125"'
 #      - '--web.telemetry-path="/metrics"'
 
-  statsd-exporter-prod:
-    image: prom/statsd-exporter:v0.18.0
-    ports:
-      - 9103:9103
-      - 9126:9125/udp
-    volumes:
-      - ./statsd-exporter-prod/statsd_mapping.yml:/tmp/statsd_mapping.yml
-    command:
-      - '--statsd.mapping-config=/tmp/statsd_mapping.yml'
-      - '--web.listen-address=:9103'
-
