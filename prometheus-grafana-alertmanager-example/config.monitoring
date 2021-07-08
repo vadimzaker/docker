@@ -1,16 +1,17 @@
-GF_SECURITY_ADMIN_PASSWORD=DraupjeFrem8
-GF_AWS_PROFILES=default
-GF_AWS_default_ACCESS_KEY_ID=AKIAXLVNOULBCCRVGFW7
-GF_AWS_default_SECRET_ACCESS_KEY=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
-GF_AWS_default_REGION=eu-central-1
+GF_SECURITY_ADMIN_USER: vadim
+GF_SECURITY_ADMIN_PASSWORD: telefon2
+#GF_AWS_PROFILES=default
+#GF_AWS_default_ACCESS_KEY_ID=
+#GF_AWS_default_SECRET_ACCESS_KEY=
+#GF_AWS_default_REGION=eu-central-1
 #GF_AUTH_LDAP_ENABLED=true
 #GF_AUTH_LDAP_CONFIG_FILE=/etc/grafana/ldap.toml
 #GF_ALLOW_SIGN_UP=false
 
-GF_SERVER_ROOT_URL=https://grafana.igenv.com
-GF_AUTH_GOOGLE_ENABLED=true
-GF_AUTH_GOOGLE_AUTH_URL=https://accounts.google.com/o/oauth2/auth
-GF_AUTH_GOOGLE_TOKEN_URL=https://accounts.google.com/o/oauth2/token
-GF_AUTH_GOOGLE_CLIENT_SECRET=LFXFGuq1HBRChA51yHBMhdlH
-GF_AUTH_GOOGLE_CLIENT_ID=905000217273-hftkln0l4cpqejfih9urbba20t0t1rbu.apps.googleusercontent.com
-GF_ALLOWED_DOMAINS=grafana.igenv.com
+#F_SERVER_ROOT_URL=
+#GF_AUTH_GOOGLE_ENABLED=true
+#GF_AUTH_GOOGLE_AUTH_URL=https://accounts.google.com/o/oauth2/auth
+#GF_AUTH_GOOGLE_TOKEN_URL=https://accounts.google.com/o/oauth2/token
+#GF_AUTH_GOOGLE_CLIENT_SECRET=
+#GF_AUTH_GOOGLE_CLIENT_ID=
+#GF_ALLOWED_DOMAINS=

@@ -9,8 +9,8 @@ global:
   # external_labels:
   #     monitor: 'Ignited'
 
-basic_auth_users:
-  admin: $2b$12$hNf2lSsxfm0.i4a.1kVpSOVyBCfIB51VRjgBUyv6kdnyTlgWj81Ay
+#basic_auth_users:
+#  admin: $2b$12$hNf2lSsxfm0.i4a.1kVpSOVyBCfIB51VRjgBUyv6kdnyTlgWj81Ay
 
 # Load and evaluate rules in this file every 'evaluation_interval' seconds.
 rule_files:
