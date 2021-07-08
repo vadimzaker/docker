@@ -62,28 +62,6 @@ scrape_configs:
     static_configs:
       - targets:
         - https://crm-stage.igenv.com/login
-        - https://crm.igenv.com/login
-        - http://mailcatcher.igenv.com:1080
-        - https://analytics.igenv.com/login
-        - https://analytics-stage.igenv.com/login
-        - https://l.horizondate.com/healthcheck
-        - https://landings-stage.igenv.com/healthcheck
-        - https://api-cms-stage.igenv.com/login
-        - https://api.horizondate.com/login
-        - https://b2b-cms-stage.igenv.com
-        - https://b2b.horizondate.com
-        - https://cms-stage.igenv.com
-        - https://horizondate.com
-        - https://hotstories.me
-        - https://dev.hotstories.me
-        - https://simweb.igenv.com/sign-in/login
-#        - https://dating-blog.com
-        - https://dating-pro.com
-#        - https://airfitness.club
-        - http://similarfaces.dev.igenv.com
-        - https://datingwebsites2020.com
-        - https://hexpert.net/auth
-        - https://support-stage.igenv.com/auth
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
