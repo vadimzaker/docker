@@ -114,7 +114,7 @@ services:
     image: gcr.io/cadvisor/cadvisor:latest
     container_name: cadvisor
     ports:
-    - 9595:9595
+    - 9595:8080
     volumes:
     - /:/rootfs:ro
     - /var/run:/var/run:rw

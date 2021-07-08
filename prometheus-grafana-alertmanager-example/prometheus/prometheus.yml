@@ -53,7 +53,7 @@ scrape_configs:
     scheme: http
     static_configs:
          - targets:
-           - cadvisor:9595
+           - cadvisor:8080
   - job_name: 'cadvisor-home'
     scrape_interval: 5s
     scheme: http
