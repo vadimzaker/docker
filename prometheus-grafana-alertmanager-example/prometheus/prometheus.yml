@@ -48,61 +48,23 @@ scrape_configs:
          - targets:
            - localhost:9090
            - node-exporter:9100
-  - job_name: 'cadvisor-stage'
-    scrape_interval: 5s
-    scheme: https
-    static_configs:
-         - targets:
-           - stage-cadvisor.igenv.com:443
-  - job_name: 'cadvisor-prod'
-    scrape_interval: 5s
-    scheme: https
-    static_configs:
-         - targets:
-           - prod-cadvisor.igenv.com:443
+  # - job_name: 'cadvisor-stage'
+  #   scrape_interval: 5s
+  #   scheme: https
+  #   static_configs:
+  #        - targets:
+  #          - stage-cadvisor.igenv.com:443
   - job_name: 'blackbox'
     metrics_path: /probe
     params:
       module: [http_2xx]  # Look for a HTTP 200 response.
     static_configs:
       - targets:
-        - https://crm-stage.igenv.com/login
-        - https://crm.igenv.com/login
-        - http://mailcatcher.igenv.com:1080
-        - https://analytics.igenv.com/login
-        - https://analytics-stage.igenv.com/login
-        - https://l.romanceticket.com/healthcheck
-        - https://landings-stage.igenv.com/healthcheck
-        - https://api-cms-stage.igenv.com/login
-        - https://api.romanceticket.com/login
-        - https://b2b-cms-stage.igenv.com
-        - https://b2b.romanceticket.com
-        - https://romanceticket.com
-        - https://hotstories.me
-        - https://dev.hotstories.me
-        - https://simweb.igenv.com/sign-in/login
-#        - https://dating-blog.com
-        - https://dating-pro.com
-#        - https://airfitness.club
-        - http://similarfaces.dev.igenv.com
-        - https://datingwebsites2020.com
-        - https://hexpert.net/auth
-        - https://support-stage.igenv.com/auth
-        - https://hd-cms-stage.igenv.com
-        - https://ad-cms-stage.igenv.com
-        - https://al-cms-stage.igenv.com
-        - https://lm-cms-stage.igenv.com
-        - https://lo-cms-stage.igenv.com
-        - https://id-cms-stage.igenv.com
-        - https://asidates.com
-        - https://asialonely.com
-        - https://lateeno.com
-        - https://latinameets.com
-        - https://internationaldate.com
-        - https://elk.igenv.com
-        - https://me-stage.igenv.com
-        - https://prometheus.igenv.com
-        - https://testrail.igenv.com
+        - https://gettorrent.cloud
+        - https://my.gettorrent.cloud
+        - http://aquaflora.com.ua
+        - https://megahost.com.ua
+        - https://megahost.com.ua/billing
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -112,123 +74,83 @@ scrape_configs:
         replacement: "blackbox_exporter:9115"  # Blackbox exporter.
 #      - target_label: region
 #        replacement: "local"
-  - job_name: 'ec2'
-    ec2_sd_configs:
-      - region: eu-central-1
-        access_key: AKIAXLVNOULBFRZI6FZD
-        secret_key: uBt09nHudNSV0kEgPJ3ICGLHzOE1HgxUFIV9xf4X
-        port: 9100
-    relabel_configs:
-      #- source_labels: [__meta_ec2_instance_id]
-      #  target_label: instance_id
-      #- source_labels: [__meta_ec2_instance_type]
-      #  target_label: instance_type
-      #- source_labels: [__meta_ec2_private_dns_name]
-      #  target_label: private_dns_name
-      - source_labels: [__meta_ec2_private_ip]
-        target_label: private_ip
-      #- source_labels: [__meta_ec2_public_dns_name]
-      #  target_label: public_dns_name
-      - source_labels: [__meta_ec2_public_ip]
-        target_label: public_ip
-      - source_labels: [__meta_ec2_tag_Name]
-        target_label: tag_Name
-      - source_labels: [__meta_ec2_tag_ansible_name]
-        target_label: ansible_name
-  - job_name: 'DigitalOcean'
-    scrape_interval: 5s
-    static_configs:
-         - targets:
-           - me1-do.igenv.com:9100
-           - me2-do.igenv.com:9100
-           - me3-do.igenv.com:9100
-           - me4-do.igenv.com:9100
-           - me5-do.igenv.com:9100
-           - me6-do.igenv.com:9100
-           - me7-do.igenv.com:9100
-           - me8-do.igenv.com:9100 
-           - me9-do.igenv.com:9100            
-           - me10-do.igenv.com:9100           
-           - me11-do.igenv.com:9100           
-           - me12-do.igenv.com:9100           
-           - me13-do.igenv.com:9100           
-           - me14-do.igenv.com:9100           
-           - me15-do.igenv.com:9100           
-           - me16-do.igenv.com:9100           
-           - me17-do.igenv.com:9100           
-           - me18-do.igenv.com:9100           
-           - me19-do.igenv.com:9100           
-           - me20-do.igenv.com:9100           
-           - me21-do.igenv.com:9100           
-           - me22-do.igenv.com:9100           
-           - me23-do.igenv.com:9100           
-           - me24-do.igenv.com:9100           
-           - me25-do.igenv.com:9100           
-           - me26-do.igenv.com:9100           
-           - me27-do.igenv.com:9100   
-           - me28-do.igenv.com:9100
-           - me29-do.igenv.com:9100 
-           - me30-do.igenv.com:9100 
-           - me31-do.igenv.com:9100 
-           - me32-do.igenv.com:9100 
-           - me33-do.igenv.com:9100  
-           - mx.hotstories.me:9100
-           - dev.hotstories.me:9100
-           - hotstories.me:9100
-           - www.adult-stories.gq:9100 
-  - job_name: mysql
-    static_configs:
-      - targets:
-        - mm-1-stage.igenv.priv:9104
-        - mm-1-prod.igenv.priv:9104
-        - ms-1-prod.igenv.priv:9104
-        - mm-1-prod.alterme.app:9104
-        - mm-1-prod-cms.igenv.com:9104
-        - ms-1-prod-cms.igenv.com:9104
-  - job_name: redis
-    static_configs:
-      - targets:
-        - 172.31.10.96:9121
-        - 172.31.44.16:9121
-  - job_name: rabbitmq
-    static_configs:
-      - targets:
-        - rabbitmq-prod-1.igenv.priv:15692
-        - rabbitmq-prod-2.igenv.priv:15692
-        - rabbitmq-prod-3.igenv.priv:15692
-        - rabbitmq-stage.igenv.priv:15692
+  # - job_name: 'ec2'
+  #   ec2_sd_configs:
+  #     - region: eu-central-1
+  #       access_key: 
+  #       secret_key: 
+  #       port: 9100
+  #   relabel_configs:
+  #     #- source_labels: [__meta_ec2_instance_id]
+  #     #  target_label: instance_id
+  #     #- source_labels: [__meta_ec2_instance_type]
+  #     #  target_label: instance_type
+  #     #- source_labels: [__meta_ec2_private_dns_name]
+  #     #  target_label: private_dns_name
+  #     - source_labels: [__meta_ec2_private_ip]
+  #       target_label: private_ip
+  #     #- source_labels: [__meta_ec2_public_dns_name]
+  #     #  target_label: public_dns_name
+  #     - source_labels: [__meta_ec2_public_ip]
+  #       target_label: public_ip
+  #     - source_labels: [__meta_ec2_tag_Name]
+  #       target_label: tag_Name
+  #     - source_labels: [__meta_ec2_tag_ansible_name]
+  #       target_label: ansible_name
+  # - job_name: 'DigitalOcean'
+  #   scrape_interval: 5s
+  #   static_configs:
+  #        - targets:
+  #          - me1-do.igenv.com:9100
+  # - job_name: mysql
+  #   static_configs:
+  #     - targets:
+  #       - mm-1-stage.igenv.priv:9104
+  #       - mm-1-prod.igenv.priv:9104
+  #       - ms-1-prod.igenv.priv:9104
+  #       - mm-1-prod.alterme.app:9104
+  #       - mm-1-prod-cms.igenv.com:9104
+  #       - ms-1-prod-cms.igenv.com:9104
+  # - job_name: redis
+  #   static_configs:
+  #     - targets:
+  #       - 172.31.10.96:9121
+  #       - 172.31.44.16:9121
+  # - job_name: rabbitmq
+  #   static_configs:
+  #     - targets:
+  #       - rabbitmq-prod-1.igenv.priv:15692
+  #       - rabbitmq-prod-2.igenv.priv:15692
+  #       - rabbitmq-prod-3.igenv.priv:15692
+  #       - rabbitmq-stage.igenv.priv:15692
   - job_name: statsd-stage
     static_configs:
       - targets:
         - statsd-exporter-stage:9102
-  - job_name: statsd-prod
-    static_configs:
-      - targets:
-        - statsd-exporter-prod:9103
-  - job_name: 'aws-billing'
-    metrics_path: '/metrics'
-    static_configs:
-      - targets: 
-        - aws-exporter:5000
-  - job_name: 's3_backup'
-    metrics_path: /probe
-    static_configs:
-      - targets:
-        - bucket=backup-hotstories.me;prefix=mysql;
-        - bucket=backup-hotstories.me;prefix=data;
-        - bucket=backup-testrail.igenv.com;prefix=mysql;
-        - bucket=backup-testrail.igenv.com;prefix=data;
-        - bucket=backup-mysql-igenv.com;prefix=prod;
-        - bucket=backup-mysql-igenv.com;prefix=stage;
-        - bucket=backup-gitlab.igenv.com;
-    relabel_configs:
-      - source_labels: [__address__]
-        regex: '^bucket=(.*);prefix=(.*);$'
-        replacement: '${1}'
-        target_label: '__param_bucket'
-      - source_labels: [__address__]
-        regex: '^bucket=(.*);prefix=(.*);$'
-        replacement: '${2}'
-        target_label: '__param_prefix'
-      - target_label: __address__
-        replacement: s3-exporter:9340  # S3 exporter.
+  # - job_name: 'aws-billing'
+  #   metrics_path: '/metrics'
+  #   static_configs:
+  #     - targets: 
+  #       - aws-exporter:5000
+  # - job_name: 's3_backup'
+  #   metrics_path: /probe
+  #   static_configs:
+  #     - targets:
+  #       - bucket=backup-hotstories.me;prefix=mysql;
+  #       - bucket=backup-hotstories.me;prefix=data;
+  #       - bucket=backup-testrail.igenv.com;prefix=mysql;
+  #       - bucket=backup-testrail.igenv.com;prefix=data;
+  #       - bucket=backup-mysql-igenv.com;prefix=prod;
+  #       - bucket=backup-mysql-igenv.com;prefix=stage;
+  #       - bucket=backup-gitlab.igenv.com;
+    # relabel_configs:
+    #   - source_labels: [__address__]
+    #     regex: '^bucket=(.*);prefix=(.*);$'
+    #     replacement: '${1}'
+    #     target_label: '__param_bucket'
+    #   - source_labels: [__address__]
+    #     regex: '^bucket=(.*);prefix=(.*);$'
+    #     replacement: '${2}'
+    #     target_label: '__param_prefix'
+    #   - target_label: __address__
+    #     replacement: s3-exporter:9340  # S3 exporter.
