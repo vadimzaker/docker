@@ -1,0 +1,5 @@
+{
+	"domain": "grafana.vadim.pp.ua",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/038bff304ae36dfc728aa21163c31d46fb24",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/038bff304ae36dfc728aa21163c31d46fb24"
+}

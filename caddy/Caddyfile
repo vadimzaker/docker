@@ -30,6 +30,15 @@ nexus.vadim.pp.ua {
         }
 }
 
+jenkins.vadim.pp.ua {
+       gzip
+        tls magellane@ukr.net
+        proxy / http://192.168.0.4:8083 {
+                transparent
+        }
+}
+
+
 grafana.vadim.pp.ua {
        gzip
         tls magellane@ukr.net

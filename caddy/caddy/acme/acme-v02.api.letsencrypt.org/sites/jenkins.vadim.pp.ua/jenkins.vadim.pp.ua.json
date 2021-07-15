@@ -1,0 +1,5 @@
+{
+	"domain": "jenkins.vadim.pp.ua",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0326ec9e15259acf15a0ab023bb243aab23d",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0326ec9e15259acf15a0ab023bb243aab23d"
+}
