@@ -3,7 +3,7 @@ spawn mount.davfs https://webdav.yandex.ru /yandexdisk
 expect "Username:"
 send "magellane89@yandex.ru\r"
 expect "Password:"
-send "subaru\r"
+send "subaru777\r"
 expect eof
 #apt install davfs2 expect
 #chmod +x /usr/local/bin/yandexdisk
