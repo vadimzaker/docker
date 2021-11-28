@@ -48,6 +48,7 @@ scrape_configs:
          - targets:
            - localhost:9090
            - node-exporter:9100
+           - home.vadim.pp.ua:9100
   - job_name: 'cadvisor-infra'
     scrape_interval: 5s
     scheme: http
@@ -67,7 +68,7 @@ scrape_configs:
     static_configs:
       - targets:
         - https://gettorrent.cloud
-        # - https://my.gettorrent.cloud
+        - https://my.gettorrent.cloud
         - http://aquaflora.com.ua
         - https://megahost.com.ua
         - https://megahost.com.ua/billing

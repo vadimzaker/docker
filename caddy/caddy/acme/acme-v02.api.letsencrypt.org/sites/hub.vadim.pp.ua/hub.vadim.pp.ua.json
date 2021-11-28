@@ -1,5 +1,5 @@
 {
 	"domain": "hub.vadim.pp.ua",
-	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0436b08f6f99380b1fbc3369bec172c2be8b",
-	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0436b08f6f99380b1fbc3369bec172c2be8b"
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/030fbd61ea4113b083738ee81e982856ef1d",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/030fbd61ea4113b083738ee81e982856ef1d"
 }

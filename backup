@@ -1,7 +1,13 @@
 #!/bin/bash
 
-tar -zcf  /tmp/docker_volume_$(date +%Y%m%d_%H%M).tar.gz -P /home/vadim/docker_volume
+file_for_backup=docker_volume_$(date +%Y%m%d_%H%M).tar.gz
 
-mv /tmp/docker_volume_*.tar.gz  /yandexdisk/elk-server/
+tar -zcf  /tmp/$file_for_backup -P /home/vadim/docker_volume
 
-find /yandexdisk/elk-server/docker_volume -atime +4 | xargs rm -f
+#mv /tmp/docker_volume_*.tar.gz  /yandexdisk/elk-server/
+
+scp -P 2222 -i  ~/.ssh/id_rsa_backup.pub /tmp/$file_for_backup root@backupproxy.vadim.pp.ua:/storage/elk
+
+
+rm /tmp/docker_volume_*.tar.gz
+#find /yandexdisk/elk-server/docker_volume -atime +4 | xargs rm -f
