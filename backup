@@ -6,7 +6,7 @@ tar -zcf  /tmp/$file_for_backup -P /home/vadim/docker_volume
 
 #mv /tmp/docker_volume_*.tar.gz  /yandexdisk/elk-server/
 
-scp -P 2222 -i  ~/.ssh/id_rsa_backup.pub /tmp/$file_for_backup root@backupproxy.vadim.pp.ua:/storage/elk
+scp -P 2222 -i  ~/.ssh/id_rsa_backup.pub /tmp/$file_for_backup root@backupproxy.vadim.pp.ua:/storage/elk/
 
 
 rm /tmp/docker_volume_*.tar.gz
