@@ -15,7 +15,9 @@ services:
     # added, I've seen this under Docker of Mac Beta for instance.
     # Due to needing to access PuppetDB on same hostame as signed in the
     # certificate you may need to uncommant the following lines
-    #environment:
+    environment:
+      DNS_ALT_NAMES: puppet, puppet.vadim.pp.ua
+      PUPPETSERVER_HOSTNAME: puppet.vadim.pp.ua
     #  - PUPPETDB_SERVER_URLS=https://puppetdb.local:8081
     #links:
     #  - puppetdb:puppetdb.local
