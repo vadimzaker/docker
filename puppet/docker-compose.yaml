@@ -6,7 +6,7 @@ services:
     hostname: puppet
     image: puppet/puppetserver
     ports:
-      - 8140
+      - 8140:8140
     volumes:
       - ./code:/etc/puppetlabs/code/
       - ./puppet/ssl:/etc/puppetlabs/puppet/ssl/
@@ -16,7 +16,7 @@ services:
     # Due to needing to access PuppetDB on same hostame as signed in the
     # certificate you may need to uncommant the following lines
     environment:
-      DNS_ALT_NAMES: puppet, puppet.vadim.pp.ua
+      DNS_ALT_NAMES: puppet.vadim.pp.ua
       PUPPETSERVER_HOSTNAME: puppet.vadim.pp.ua
     #  - PUPPETDB_SERVER_URLS=https://puppetdb.local:8081
     #links:

@@ -1,0 +1,15 @@
+version: '2.1'
+
+services:
+
+  jenkins:
+#    image: jenkins/jenkins:2.302
+    image: trion/jenkins-docker-client
+    container_name: jenkins
+    restart: always
+    ports:
+      - 8083:8080
+      - 50000:50000
+    volumes:
+      - ../../docker_volume/jenkins/:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock

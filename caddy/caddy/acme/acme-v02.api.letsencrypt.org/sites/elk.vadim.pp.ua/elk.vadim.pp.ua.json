@@ -1,5 +1,5 @@
 {
 	"domain": "elk.vadim.pp.ua",
-	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/037b68fa85bd6f6d71a3575dc4bfd2dc6220",
-	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/037b68fa85bd6f6d71a3575dc4bfd2dc6220"
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03500dfc50545aad88dce1d2d618893f959a",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03500dfc50545aad88dce1d2d618893f959a"
 }

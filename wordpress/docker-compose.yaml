@@ -1,0 +1,69 @@
+version: '3.3'
+services:
+  # Database
+  database:
+    image: mysql:8.0
+    container_name: database
+#    ports:
+#      - 3306:3306
+    volumes:
+      - ./db:/var/lib/mysql
+    restart: always
+#    env_file:
+#      - .env
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_ROOT_PASSWORD: puKPMcU4FonA
+    command: '--default-authentication-plugin=mysql_native_password'
+    networks:
+      - blog-network
+  # WordPress
+  wordpress:
+    depends_on:
+      - database
+    image: wordpress:latest
+#    image: wordpress:php7.4-fpm-alpine
+#    image: wordpress:5-php5.6-fpm
+    ports:
+      - '81:80'
+    container_name: wordpress
+    restart: always
+    user: "root:root"
+#    env_file:
+#      - .env
+    environment:
+      - WORDPRESS_DB_HOST=database
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=wordpress
+      - WORDPRESS_DB_NAME=wordpress
+    volumes:
+#      - ./php.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./wordpress:/var/www/html
+    networks:
+      - blog-network
+  # Webserver
+  caddy:
+    image: caddy
+    image: truedevops/caddy_caddy
+    container_name: webserver
+    environment:
+      - CADDYPATH=/etc/caddycerts
+      - ACME_AGREE=true
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ${PWD}/Caddyfile:/etc/Caddyfile
+      - ${PWD}/caddy:/etc/caddycerts
+#      - ${PWD}/wordpress:/var/www/html
+#      - ./wordpress:/var/www/html
+#      - ./caddy_data:/data
+#      - ./caddy_config:/config
+#      - ./Caddyfile:/etc/caddy/Caddyfile
+    networks:
+       - blog-network
+networks:
+  blog-network:
+    driver: bridge
