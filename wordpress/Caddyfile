@@ -1,8 +1,8 @@
 wordpress.vadim.pp.ua, www.wordpress.vadim.pp.ua {
-  gzip
-  proxy / wordpress:80 {
-    transparent
-  }
-}
-#    reverse_proxy wordpress:80
+#  gzip
+#  proxy / wordpress:80 {
+#    transparent
+#  }
 #}
+    reverse_proxy wordpress:80
+}

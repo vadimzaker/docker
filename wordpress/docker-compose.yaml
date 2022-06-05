@@ -45,9 +45,8 @@ services:
       - blog-network
   # Webserver
   caddy:
-    image: caddy
-    image: truedevops/caddy_caddy
-    container_name: webserver
+    image: caddy:2.5.1
+    container_name: caddy
     environment:
       - CADDYPATH=/etc/caddycerts
       - ACME_AGREE=true
@@ -55,15 +54,37 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ${PWD}/Caddyfile:/etc/Caddyfile
-      - ${PWD}/caddy:/etc/caddycerts
+#      - ./Caddyfile:/etc/Caddyfile
+#      - ./caddy:/etc/caddycerts
 #      - ${PWD}/wordpress:/var/www/html
 #      - ./wordpress:/var/www/html
 #      - ./caddy_data:/data
 #      - ./caddy_config:/config
-#      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./Caddyfile:/etc/caddy/Caddyfile
     networks:
        - blog-network
+  # FTP
+  ftp:
+#    image: delfer/alpine-ftp-server
+    image: stilliard/pure-ftpd
+    container_name: ftp
+    environment:
+#      - USERS="one|1234|/var/www/html twu|12345|/var/www/html"
+#      - ADDRESS=wordpress.vadim.pp.ua
+      - FTP_USER_NAME=guest
+      - FTP_USER_PASS=guest
+      - FTP_USER_HOME=/home/guest
+      - FTP_PASSIVE_PORTS=10000:10009
+    ports:
+      - 21:21
+      - 10000-10009:10000-10009
+#    volumes:
+#      - ./wordpress:/var/www/html
+    depends_on:
+      - wordpress
+    networks:
+       - blog-network
+
 networks:
   blog-network:
     driver: bridge
