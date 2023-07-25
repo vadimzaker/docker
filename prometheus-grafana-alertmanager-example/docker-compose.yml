@@ -93,6 +93,9 @@ services:
 #      - ./grafana/admin_password:/admin_password
     env_file:
       - config.monitoring
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: adminpassword123
+      GF_SECURITY_ADMIN_USER: admin
 
   blackbox_exporter:
     image: prom/blackbox-exporter:v0.18.0
