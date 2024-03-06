@@ -61,17 +61,61 @@ scrape_configs:
     static_configs:
          - targets:
            - home.vadim.pp.ua:9595
+  - job_name: 'smart-exporter'
+    scrape_interval: 5s
+    scheme: http
+    static_configs:
+         - targets:
+           - 5.9.136.243:9633
+           - 46.4.253.180:9633
   - job_name: 'blackbox'
     metrics_path: /probe
     params:
-      module: [http_2xx]  # Look for a HTTP 200 response.
+      module: [http_2xx]
     static_configs:
       - targets:
-        - https://gettorrent.cloud
-        - https://my.gettorrent.cloud
-        - http://aquaflora.com.ua
-        - https://megahost.com.ua
-        - https://megahost.com.ua/billing
+        - http://wd.soz.in.ua
+        - https://evos.in.ua
+        - https://graylog.tn.in.ua
+        - https://tn.in.ua
+        - https://rainbow.evos.in.ua
+        - https://wls.evos.in.ua
+        - https://docs.evos.in.ua
+        - https://webtn-map.evos.in.ua
+        - https://support.evos.in.ua
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: "blackbox_exporter:9115"  # Blackbox exporter.
+  - job_name: 'blackbox_icmp'
+    metrics_path: /probe
+    params:
+      module: [icmp_ipv4]  # Look for a HTTP 200 response.
+    static_configs:
+      - targets:
+        - 88.208.35.90
+        - 88.208.35.91
+        - 88.208.39.185
+        - 176.9.80.238
+        - 5.9.112.247
+        - 144.76.147.75
+        - 5.9.136.243
+        - 136.243.56.75
+        - 136.243.64.173
+        - 168.119.145.119
+        - 168.119.145.101
+        - 95.217.34.103
+        - 46.4.253.180
+        - 176.111.61.13
+        - 176.111.61.2
+        - p1.soz.in.ua
+        - p2.soz.in.ua
+        - p3.soz.in.ua
+        - p4.soz.in.ua
+        - 116.203.134.188
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target

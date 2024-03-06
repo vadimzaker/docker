@@ -1,0 +1,5 @@
+{
+	"domain": "graylog.tn.in.ua",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0370d5743c5eec3b84ca1773a06b56c3e122",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/0370d5743c5eec3b84ca1773a06b56c3e122"
+}

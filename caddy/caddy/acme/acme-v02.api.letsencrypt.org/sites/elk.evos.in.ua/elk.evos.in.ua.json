@@ -1,0 +1,5 @@
+{
+	"domain": "elk.evos.in.ua",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/047dedf0d926f2dc991b6c27e966bd5fe754",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/047dedf0d926f2dc991b6c27e966bd5fe754"
+}

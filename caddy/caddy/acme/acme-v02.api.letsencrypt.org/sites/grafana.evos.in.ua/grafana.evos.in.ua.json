@@ -1,0 +1,5 @@
+{
+	"domain": "grafana.evos.in.ua",
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/04b966d6c97dab759167ed61018980c8929f",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/04b966d6c97dab759167ed61018980c8929f"
+}

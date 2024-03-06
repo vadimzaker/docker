@@ -1,0 +1,12 @@
+{
+	"Email": "vadim.zaker@gmail.com",
+	"Registration": {
+		"body": {
+			"status": "valid",
+			"contact": [
+				"mailto:vadim.zaker@gmail.com"
+			]
+		},
+		"uri": "https://acme-v02.api.letsencrypt.org/acme/acct/1210974867"
+	}
+}

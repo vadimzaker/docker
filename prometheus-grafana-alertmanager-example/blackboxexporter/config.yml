@@ -9,8 +9,10 @@ modules:
       no_follow_redirects: false
       fail_if_ssl: false
       fail_if_not_ssl: false
-#      fail_if_matches_regexp:
-#        - "Could not connect to database"
       tls_config:
         insecure_skip_verify: false
       preferred_ip_protocol: "ip4" # defaults to "ip6"
+  icmp_ipv4:
+    prober: icmp
+    icmp:
+      preferred_ip_protocol: ip4

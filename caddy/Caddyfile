@@ -1,48 +1,32 @@
 #zabbix.vadim.pp.ua {
 #       gzip
-#        tls magellane@ukr.net
+#        tls 
 #        proxy / http://192.168.0.4:8880 {
 #                transparent
 #        }
 #}
 
-elk.vadim.pp.ua {
+elk.evos.in.ua {
        gzip
-        tls magellane@ukr.net
-        proxy / http://192.168.0.4:5601 {
+        tls vadim.zaker@gmail.com
+        proxy / http://46.4.253.131:5601 {
                 transparent
         }
 }
 
-hub.vadim.pp.ua {
+grafana.evos.in.ua {
        gzip
-        tls magellane@ukr.net
-        proxy / http://192.168.0.4:8082 {
-                transparent
-        }
-}
-
-nexus.vadim.pp.ua {
-       gzip
-        tls magellane@ukr.net
-        proxy / http://192.168.0.4:8081 {
-                transparent
-        }
-}
-
-jenkins.vadim.pp.ua {
-       gzip
-        tls magellane@ukr.net
-        proxy / http://192.168.0.4:8083 {
+        tls vadim.zaker@gmail.com
+        proxy / http://46.4.253.131:81 {
                 transparent
         }
 }
 
 
-grafana.vadim.pp.ua {
+graylog.tn.in.ua {
        gzip
-        tls magellane@ukr.net
-        proxy / http://192.168.0.4:3000 {
+        tls vadim.zaker@gmail.com
+        proxy / http://192.168.136.88:9000 {
                 transparent
         }
 }
